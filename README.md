@@ -71,6 +71,16 @@ If there are two players in the lobby again, start a new match, and ignore any o
 
 ```
 docker-compose up
+
+(after initial docker finishes, needs restart to work)
+
+open localhost:3000 in a browser and in incognito browser, so 2 separate units
+
+register in both instant (or login) - create 2 different accounts
+
+if 'Ready' is clicked in both instances the game starts
+
+rules.md contains how the game works
 ```
 
 # Time spent on the project
