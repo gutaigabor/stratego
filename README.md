@@ -12,10 +12,6 @@ There is technically no time limit. We ask you to honestly track your working ho
 
 We encourage you to use comments richly throughout the codebase as you expect somebody else to comprehend your code as quickly as possible.
 
-### ❓ Questions regarding the exercise:
-
-If you might have any questions regarding the exercise, feel free to contact [Daniel Fazekas](mailto:daniel.fazekas@scriptide.tech?subject=Questions%20about%20the%20interview%20project).
-
 <br />
 
 ## 💻 Tech Stack:
