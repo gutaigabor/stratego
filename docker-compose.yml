@@ -1,0 +1,64 @@
+services:
+  auth:
+    build:
+      context: ./stratego-backend
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./stratego-backend/apps/auth/.env
+    volumes:
+      - ./stratego-backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db_mongo
+    ports:
+      - '9000:9000'
+  
+  websocket:
+    build:
+      context: ./stratego-backend
+      dockerfile: ./apps/websocket/Dockerfile
+      target: development
+    command: npm run start:dev websocket
+    env_file:
+      - ./stratego-backend/apps/websocket/.env
+    volumes:
+      - ./stratego-backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db_mongo
+      - auth
+    ports:
+      - '9001:9001'
+  
+  frontend:
+    build:
+      context: ./stratego-frontend
+      dockerfile: ./Dockerfile
+      target: development
+    command: npm run dev
+    env_file:
+      - ./stratego-frontend/.env
+    volumes:
+      - ./stratego-frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db_mongo
+      - auth
+      - websocket
+    ports:
+      - '3000:3000'
+
+  db_mongo:
+    build:
+      context: ./mongo
+      dockerfile: ./Dockerfile
+    image: db_mongo
+    container_name: db_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/backups:/.tmp
+    env_file:
+      - ./mongo/config/.env
